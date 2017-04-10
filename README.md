@@ -1,2 +1,1 @@
 # ymem
-ybin memcached
