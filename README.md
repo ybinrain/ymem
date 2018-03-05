@@ -1,1 +1,1 @@
-# ymemcached
+# ymemd
