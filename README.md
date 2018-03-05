@@ -1,1 +1,3 @@
 # ymemd
+
+git describe
