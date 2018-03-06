@@ -21,3 +21,6 @@ tags
 /version.m4
 /memcached.spec
 .*.swp
+compile
+*.o
+ymemd

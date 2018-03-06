@@ -1,4 +1,2 @@
 # ymemd
 
-git describe
-
