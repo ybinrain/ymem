@@ -22,7 +22,7 @@ locate_binary() {
 }
 
 
-# 判断aclocal 是否存在
+# 检查aclocal, 执行并生成 aclocal.m4 宏定义文件
 echo "aclocal..."
 if test x"$ACLOCAL" = x; then
     ACLOCAL=`locate_binary aclocal aclocal-1.15`
@@ -32,3 +32,24 @@ if test x"$ACLOCAL" = x; then
 fi
 
 $ACLOCAL || exit 1
+
+# autoheader 执行并生成 config.h.in 头文件模板
+echo "autoheader..."
+AUTOHEADER=${AUTOHEADER:-autoheader}
+$AUTOHEADER || exit 1
+
+# 检查automake, 执行并生成 Makefile.in 模板文件
+echo "automake..."
+if test x"$AUTOMAKE" = x; then
+    AUTOMAKE=`locate_binary automake`
+    if test x"$AUTOMAKE" = x; then
+        die "Did not find a supported automake"
+    fi
+fi
+$AUTOMAKE --foreign --add-missing || $AUTOMAKE --gnu --add-missing || exit 1
+
+# autoconf, 执行并生成 configure 文件
+echo "autoconf..."
+AUTOCONF=${AUTOCONF:-autoconf}
+$AUTOCONF || exit 1
+

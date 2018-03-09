@@ -20,6 +20,21 @@ AM_CONFIG_HEADER([config.h])
 AC_PROG_CC
 
 
+dnl
+dnl 
+dnl
+AC_DEFUN([DETECT_CLANG], 
+[
+    AC_MSG_CHECKING([for clang in use])
+    #AC_COMPILE_IFELSE(
+    #[
+    #],
+    #[CLANG=yes],[CLANG=no])
+    AC_MSG_RESULT([$CLANG])
+
+])
+DETECT_CLANG([],[])
+
 # 根据 Makefile.in 生成 Makefile 文件
 # automake 根据 configure.ac Makefile.am 生成 Makefile.in 文件
 AC_CONFIG_FILES([Makefile])
