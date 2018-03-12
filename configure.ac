@@ -35,6 +35,23 @@ AC_DEFUN([DETECT_CLANG],
 ])
 DETECT_CLANG([],[])
 
+dnl
+LIBS="-levent $LIBS"
+
+
+dnl 检查是否支持一下函数
+AC_CHECK_FUNCS([getopt_long], [AC_DEFINE(HAVE_GETOPT_LONG, 1, [Define to 1 if support getopt_long])])
+
+dnl 检查布尔类型
+AC_HEADER_STDBOOL
+AH_BOTTOM([#if HAVE_STDBOOL_H
+#include <stdbool.h>
+#else
+#define false 0
+#define true 1
+#endif ])
+
+
 # 根据 Makefile.in 生成 Makefile 文件
 # automake 根据 configure.ac Makefile.am 生成 Makefile.in 文件
 AC_CONFIG_FILES([Makefile])
